@@ -1,0 +1,13 @@
+/* index.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.blur-small {
+  backdrop-filter: blur(50px); /* Adjust the value based on your desired level of blur */
+}
+/* Add this to your CSS or styles file */
+.custom-text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adjust the values based on your preference */
+}
