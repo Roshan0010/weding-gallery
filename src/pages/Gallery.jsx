@@ -1,3 +1,4 @@
+import { useState,useEffect } from "react";
 import Masonry from "react-responsive-masonry";
 import useWindowDimensions from "../components/UseDimentionHook";
 
