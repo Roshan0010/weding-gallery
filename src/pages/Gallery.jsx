@@ -8,6 +8,8 @@ import shaddi from "../data/Shaddi";
 import haldi from "../data/Haldi";
 import mehendi from "../data/Mehendi";
 import allinOne from "../data/allinone";
+import reception from "../data/reception";
+import brideGroomSpecial from "../data/brideGroomSpecial";
 
 const Gallery = ({ event }) => {
 	const { width } = useWindowDimensions();
@@ -36,6 +38,16 @@ const Gallery = ({ event }) => {
 				let temp = allinOne.map((item) => item.secure_url);
 				setImages(temp);
 			}
+			if(event === "reception"){
+				let temp = reception.map((item) => item.secure_url);
+				setImages(temp);
+			}
+			if(event === "bride-groom"){
+				let temp = brideGroomSpecial.map((item) => item.secure_url);
+				setImages(temp);
+			}
+
+			//
 		}
 		fetchImage();
 	}, []);
