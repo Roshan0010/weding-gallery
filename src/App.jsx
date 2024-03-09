@@ -3,15 +3,21 @@ import Landing from "./pages/Landing";
 import Content from "./pages/Content";
 import Gallery from "./pages/Gallery";
 
+
 const App = () => {
+
+
 	return (
 		<Router>
 			<Routes>
 				<Route path="/" element={<Landing />} />
 				<Route path="/content" element={<Content />} />
-				<Route path="/bride-gallery" element={<Gallery />} />
-				<Route path="/bride-groom-gallery" element={<Gallery/>} />
-				<Route path="/groom-gallery" element={<Gallery />} />
+				<Route path="/haldi" element={<Gallery event={"haldi"} />} />
+				<Route path="/more-events" element={<Gallery event={"more-events"} />} />
+				<Route path="/reception" element={<Gallery />} />
+				<Route path="/shaadi" element={<Gallery event={"shaddi"}  />} />
+				<Route path="/mehendi" element={<Gallery event={"mehendi"} />} />
+				<Route path="/bride-groom" element={<Gallery />} />
 			</Routes>
 		</Router>
 	);
@@ -19,5 +25,4 @@ const App = () => {
 
 export default App;
 
-//bride-gallery
-
+//84.jpg

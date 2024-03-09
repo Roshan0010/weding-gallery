@@ -1,63 +1,88 @@
-import { useState,useEffect } from "react";
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from "react";
 import Masonry from "react-responsive-masonry";
 import useWindowDimensions from "../components/UseDimentionHook";
+import PhotoView from "../components/PhotoView";
+import shaddi from "../data/Shaddi";
+import haldi from "../data/Haldi";
+import mehendi from "../data/Mehendi";
+import allinOne from "../data/allinone";
 
-const images = [
-	"https://placekitten.com/400/300",
-	"https://placekitten.com/300/400",
-	"https://placekitten.com/500/500",
-	"https://placekitten.com/600/350",
-	"https://placekitten.com/350/600",
-	"https://placekitten.com/450/450",
-	"https://placekitten.com/550/250",
-	"https://placekitten.com/700/400",
-	"https://placekitten.com/400/700",
-	"https://placekitten.com/800/600",
-	"https://placekitten.com/600/800",
-	"https://placekitten.com/750/450",
-	"https://placekitten.com/450/750",
-	"https://placekitten.com/850/550",
-	"https://placekitten.com/500/850",
-	"https://placekitten.com/900/700",
-	"https://placekitten.com/700/900",
-	"https://placekitten.com/950/500",
-	"https://placekitten.com/550/950",
-	"https://placekitten.com/1000/800",
-	// Add more dynamic images here
-];
-
-const Gallery = () => {
+const Gallery = ({ event }) => {
 	const { width } = useWindowDimensions();
 	console.log(width);
 	const [columnsCnt, setColumnsCnt] = useState(3);
+	const [photoModal, setPhotoModal] = useState(false);
+	const [url, setUrl] = useState("");
+	const [images, setImages] = useState([]);
 
-    useEffect(() => {
-      if(width>500 && width<1024){
-        setColumnsCnt(2);
-      }
-      else if(width <= 500){
-        setColumnsCnt(1);
-      }
-      else{
-        setColumnsCnt(3);
-      }
-    
+	useEffect(() => {
+		async function fetchImage() {
+			if (event === "shaddi") {
+				// console.log(shaddi);
+				let temp = shaddi.map((item) => item.secure_url);
+				setImages(temp);
+			}
+			if(event === "haldi"){
+				let temp = haldi.map((item) => item.secure_url);
+				setImages(temp);
+			}
+			if(event === "mehendi"){
+				let temp = mehendi.map((item) => item.secure_url);
+				setImages(temp);
+			}
+			if(event === "more-events"){
+				let temp = allinOne.map((item) => item.secure_url);
+				setImages(temp);
+			}
+		}
+		fetchImage();
+	}, []);
 
-    }, [width])
-    
+	useEffect(() => {
+		if (width > 500 && width <= 1024) {
+			setColumnsCnt(2);
+		} else if (width <= 500) {
+			setColumnsCnt(1);
+		} else {
+			setColumnsCnt(3);
+		}
+	}, [width]);
 
+	const openModal = () => {
+		setPhotoModal(true);
+	};
 
-	const items = images.map((imageUrl, index) => (
-		<div key={index} className="masonry-item">
-			<img src={imageUrl} alt={`Image ${index}`} className="w-full h-auto" />
+	const closeModal = () => {
+		setPhotoModal(false);
+	};
+
+	const items = images.map((item, index) => (
+		<div
+			key={index}
+			className="masonry-item"
+			onClick={() => {
+				setUrl(item);
+				openModal();
+			}}
+		>
+			<img
+				loading="lazy"
+				src={item}
+				alt={`Image ${index}`}
+				className="w-full h-auto"
+			/>
 		</div>
 	));
 
 	return (
-		<div className="App m-2">
+		<div className="App m-2 relative">
 			<Masonry columnsCount={columnsCnt} gutter="10px">
 				{items}
 			</Masonry>
+			{/* <PhotoView className='relative' /> */}
+			{photoModal && <PhotoView setPhotoModal={setPhotoModal} url={url} />}
 		</div>
 	);
 };

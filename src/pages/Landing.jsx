@@ -21,7 +21,10 @@ const Landing = () => {
 						Sweta Weds Abhishek
 					</span>
 
-					<button onClick={()=>navigate("/content")} className="border p-2 rounded-3xl border-[3px] bg-rose-400">
+					<button
+						onClick={() => navigate("/content")}
+						className="border p-2 rounded-3xl border-[3px] bg-rose-400"
+					>
 						Get Started
 					</button>
 				</div>
